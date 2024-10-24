@@ -42,13 +42,17 @@ function validateForm() {
     }
 
     // Validate Password
-    let password = document.forms['myForm']["fpassword"].value;
-    let passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/; // At least one letter, one special character, one number, etc.
+    let password = document.forms['myForm']["fpassword"].value.trim(); // Trim whitespace
+    let passwordRegex = /^.{8}$/;
 
-    if (!passwordRegex.test(password)) {
+    if (!password.test(password)) {
         setError("password", "Password must be at least 8 characters, include one uppercase, one lowercase, one digit, and one special character.");
         returnval = false;
+    } else {
+        setError("password", ""); // Clear error if valid
     }
+
+
 
     // Validate Confirm Password
     let cpassword = document.forms['myForm']["fcpassword"].value;
